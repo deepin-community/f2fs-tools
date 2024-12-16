@@ -1,15 +1,57 @@
-Source: template-repository
-Section: unknown
+Source: f2fs-tools
+Section: admin
 Priority: optional
-Maintainer: Tsic404 <liuheng@deepin.org>
-Build-Depends: debhelper (>= 11)
-Standards-Version: 4.1.3
-Homepage: https://github.com/deepin-community/template-repository
-#Vcs-Browser: https://salsa.debian.org/debian/deepin-community-template-repository
-#Vcs-Git: https://salsa.debian.org/debian/deepin-community-template-repository.git
+Maintainer: Filesystems Group <filesystems-devel@lists.alioth.debian.org>
+Uploaders: Vincent Cheng <vcheng@debian.org>, Theodore Y. Ts'o <tytso@mit.edu>
+Build-Depends:
+ debhelper-compat (= 13),
+ libblkid-dev,
+ libselinux1-dev,
+ pkg-config,
+ uuid-dev
+Standards-Version: 4.6.2
+Rules-Requires-Root: binary-targets
+Homepage: https://www.kernel.org/doc/html/latest/filesystems/f2fs.html
+Vcs-Browser: https://salsa.debian.org/debian/f2fs-tools
+Vcs-Git: https://salsa.debian.org/debian/f2fs-tools.git
 
-Package: template-repository
-Architecture: any
-Depends: ${shlibs:Depends}, ${misc:Depends}
-Description: <insert up to 60 chars description>
- <insert long description, indented with spaces>
+Package: f2fs-tools
+Architecture: linux-any
+Depends: ${misc:Depends}, ${shlibs:Depends}
+Description: Tools for Flash-Friendly File System
+ F2FS is a new filesystem for Linux aimed at NAND flash memory-based storage
+ devices, such as SSD, eMMC, and SD cards. It is based on Log-structured File
+ System (LFS).
+
+Package: libf2fs-dev
+Section: libdevel
+Architecture: linux-any
+Multi-Arch: same
+Depends: uuid-dev, ${misc:Depends}
+Description: Core library for Flash-Friendly File System - Development files
+ F2FS is a new filesystem for Linux aimed at NAND flash memory-based storage
+ devices, such as SSD, eMMC, and SD cards. It is based on Log-structured File
+ System (LFS).
+ .
+ This package contains the development files for the libf2fs library.
+
+Package: libf2fs-format-dev
+Section: libdevel
+Architecture: linux-any
+Multi-Arch: same
+Depends: uuid-dev, ${misc:Depends}
+Breaks: libf2fs-dev (<< 1.11.0-1~)
+Replaces: libf2fs-dev (<< 1.11.0-1~)
+Description: Format library for Flash-Friendly File System - Development files
+ F2FS is a new filesystem for Linux aimed at NAND flash memory-based storage
+ devices, such as SSD, eMMC, and SD cards. It is based on Log-structured File
+ System (LFS).
+ .
+ This package contains the development files for the libf2fs-format library.
+
+Package: f2fs-tools-udeb
+Package-Type: udeb
+Section: debian-installer
+Architecture: linux-any
+Depends: ${misc:Depends}, ${shlibs:Depends}
+Description: Tools for Flash-Friendly File System (udeb)
